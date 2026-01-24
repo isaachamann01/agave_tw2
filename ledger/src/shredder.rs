@@ -77,15 +77,7 @@ where
     if !data_complete {
         return Err(Error::from(TooFewDataShards));
     }
-    if data.is_empty() {
-        // For backward compatibility. This is needed when the data shred
-        // payload is None, so that deserializing to Vec<Entry> results in
-        // an empty vector.
-        let data_buffer_size = ShredData::capacity(/*merkle_proof_size:*/ None).unwrap();
-        Ok(vec![0u8; data_buffer_size])
-    } else {
-        Ok(data)
-    }
+    Ok(data)
 }
 
 
